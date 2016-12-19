@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Hotel Information</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+ <script>
+  $(function(){
+     $.ajax({
+           url: "http://140.134.26.71:58080/web-prog/Hotels",
+           type: "GET",
+           dataType: "json",
+           success: function(data){
+		        var item = data.Infos.Info;
+			    var j=0;
+			    for(var i=0 ; i<item.length; i=i+3){
+			        $("#attraction").append('<tr id = "attractionrow'+i+'">');
+				for(j=i ; j<i+3; j++){
+			            var name = item[j].Name;
+			    	    var add = item[j].Add;
+			    	    var picture = item[j].Picture1;
+						var description = item[j].Description;
+						var tel = item[j].Tel;
+						var grade = item[j].Grade
+						var serviceinfo = item[j].Serviceinfo
+						var website = item[j].Website
+			    	    $("#attractionrow"+i).append('<th><div><h3>'+name+'</h3></div><div><a Target="_new" href="'+website+'"><img src="'+picture+'" class="img-circle" height="200" width="200"></a></div><p>地址：</p><p style="font-weight:normal">'+add+'</p><p>聯絡方式：</p><p style="font-weight:normal">'+tel+'</p></th>');
+				}
+			}
+		    },
+		    error: function(){
+		        alert('error');
+		    }
+		});
+	    });
+
+
+   </script>
+     
+     <style>
+	    body {
+	       background-attachment: fixed;
+	       background-repeat: repeat;
+	       background-position:left top;	 	
+               background-image: url("https://github.com/fcu-d0240353/WP-HW6/blob/master/Blur-2.png?raw=true");
+	    }
+          
+	</style> 
+ 
+     </head>
+     <span style="font-family:Microsoft JhengHei;">
+     <body style="color:white;">
+         
+     <h1 align="center">飯 店 資 訊</h1>
+      <table border="1" id="attraction" align="center">
+	    <tr id = "attractionrow" >
+	        <!--td id = "attractioncol"></td-->
+	    </tr>
+     </body>
+     </span>
+     </html>
